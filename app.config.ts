@@ -9,5 +9,13 @@ export default defineAppConfig({
             error: 'red',
             neutral: 'slate'
         }
+    },
+    // Disable icon API fallback for strict CSP compliance
+    // All icons must be bundled at build time
+    icon: {
+        // Disable runtime fetching from Iconify API
+        fetchTimeout: 0,
+        // Use local mode only - no API calls
+        mode: 'svg'
     }
 })

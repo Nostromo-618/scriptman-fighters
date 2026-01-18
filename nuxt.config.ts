@@ -25,7 +25,29 @@ export default defineNuxtConfig({
     serverBundle: 'local',
     clientBundle: {
       scan: true,
-      sizeLimitKb: 512
+      sizeLimitKb: 1024,
+      // Include icons used by Nuxt UI components that aren't detected by scanning
+      icons: [
+        'lucide:menu',
+        'lucide:x',
+        'lucide:check',
+        'lucide:chevron-down',
+        'lucide:chevron-up',
+        'lucide:chevron-left',
+        'lucide:chevron-right',
+        'lucide:sun',
+        'lucide:moon',
+        'lucide:monitor',
+        'lucide:circle-alert',
+        'lucide:circle-check',
+        'lucide:info',
+        'lucide:triangle-alert',
+        'lucide:loader-circle',
+        'heroicons:x-mark',
+        'heroicons:chevron-down',
+        'heroicons:chevron-up',
+        'heroicons:check'
+      ]
     }
   },
 
