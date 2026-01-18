@@ -1,0 +1,113 @@
+/* 
+ * =============================================================================
+ * MAIN.CSS - Global Styles with Nuxt UI
+ * =============================================================================
+ * Nuxt UI imports Tailwind CSS and provides design system tokens.
+ * Dark mode is automatically enabled by Nuxt UI.
+ * =============================================================================
+ */
+
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@layer base {
+  *, *::before, *::after {
+    font-family: 'Ubuntu', sans-serif;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    font-family: 'Ubuntu', sans-serif;
+    @apply bg-gray-50 text-gray-900;
+    @apply dark:bg-slate-950 dark:text-white;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  /* Custom Scrollbar - Dark Mode */
+  .dark ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .dark ::-webkit-scrollbar-track {
+    @apply bg-slate-900;
+  }
+
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700 rounded;
+  }
+
+  .dark ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-600;
+  }
+
+  /* Custom Scrollbar - Light Mode */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+  
+  /* Improved scrolling for all modals */
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: theme('colors.slate.700') theme('colors.slate.900');
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    @apply bg-slate-900;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-slate-700 rounded;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-600;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
+  }
+
+  /* Ensure router links always show pointer cursor */
+  a.router-link-active,
+  a.router-link-exact-active,
+  .router-link-active,
+  .router-link-exact-active {
+    cursor: pointer !important;
+  }
+
+  /* Modal-specific improvements */
+  .disclaimer-modal-footer {
+    position: sticky !important;
+    bottom: 0 !important;
+    background: rgba(15, 23, 42, 0.9) !important;
+    backdrop-filter: blur(8px) !important;
+    z-index: 10 !important;
+    box-shadow: 0 -4px 6px -1px rgba(0, 0, 0, 0.1);
+  }
+
+  /* Hide scrollbar utility - used for tabs with arrow navigation */
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari, Opera */
+  }
+}
+
+
