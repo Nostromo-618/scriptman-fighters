@@ -10,7 +10,6 @@
     "preview": "nuxt preview"
   },
   "dependencies": {
-    "@monaco-editor/loader": "^1.7.0",
     "@nuxt/ui": "^4.3.0",
     "acorn": "^8.15.0",
     "monaco-editor": "^0.55.1",
@@ -21,6 +20,8 @@
   },
   "devDependencies": {
     "@iconify-json/heroicons": "^1.2.3",
+    "@iconify-json/lucide": "^1.2.0",
+    "@iconify-json/simple-icons": "^1.2.0",
     "@types/node": "latest",
     "typescript": "latest",
     "vue-tsc": "^3.2.2"

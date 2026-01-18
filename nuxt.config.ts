@@ -5,9 +5,9 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 const cspMeta = isProduction
   ? [{
-      'http-equiv': 'Content-Security-Policy',
-      content: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:;"
-    }]
+    'http-equiv': 'Content-Security-Policy',
+    content: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:;"
+  }]
   : [];
 
 export default defineNuxtConfig({
@@ -18,6 +18,16 @@ export default defineNuxtConfig({
   modules: ['@nuxt/ui'],
 
   css: ['~/assets/css/main.css'],
+
+  // Bundle icons locally at build time - no external API calls needed
+  icon: {
+    // Use 'local' mode to bundle all icons into the app at build time
+    serverBundle: 'local',
+    clientBundle: {
+      scan: true,
+      sizeLimitKb: 512
+    }
+  },
 
   app: {
     baseURL: '/scriptman-fighters/',

@@ -204,8 +204,7 @@
 
 <script setup lang="ts">
 import { ref, watch, onMounted, onUnmounted, computed, nextTick } from 'vue';
-import loader from '@monaco-editor/loader';
-import type { editor } from 'monaco-editor';
+import * as monaco from 'monaco-editor';
 import {
   getDefaultTemplate,
   loadScript,
@@ -254,10 +253,9 @@ const activeSlot = ref<'slot1' | 'slot2'>('slot1');
 const isLoading = ref(true);
 
 // Editor instances
-let editorInstanceA: editor.IStandaloneCodeEditor | null = null;
-let editorInstanceB: editor.IStandaloneCodeEditor | null = null;
-let editorInstanceSingle: editor.IStandaloneCodeEditor | null = null;
-let monacoInstance: typeof import('monaco-editor') | null = null;
+let editorInstanceA: monaco.editor.IStandaloneCodeEditor | null = null;
+let editorInstanceB: monaco.editor.IStandaloneCodeEditor | null = null;
+let editorInstanceSingle: monaco.editor.IStandaloneCodeEditor | null = null;
 const cleanupFunctions: Array<() => void> = [];
 let editorsInitialized = false;
 
@@ -283,7 +281,7 @@ const switchSlot = (slot: 'slot1' | 'slot2') => {
 };
 
 // Monaco editor configuration with VS Code default font
-const editorOptions: editor.IStandaloneEditorConstructionOptions = {
+const editorOptions: monaco.editor.IStandaloneEditorConstructionOptions = {
   language: 'javascript',
   theme: editorTheme.value,
   minimap: { enabled: false },
@@ -298,50 +296,14 @@ const editorOptions: editor.IStandaloneEditorConstructionOptions = {
   padding: { top: 12 }
 };
 
-// Configure TypeScript/JS language features
-const configureMonacoLanguage = (monaco: typeof import('monaco-editor')) => {
-  if (monaco.languages && monaco.languages.typescript) {
-    const tsLang = monaco.languages.typescript as any;
-    if (tsLang.javascriptDefaults && typeof tsLang.javascriptDefaults.addExtraLib === 'function') {
-      tsLang.javascriptDefaults.addExtraLib(`
-        interface FighterState {
-          x: number;
-          y: number;
-          vx: number;
-          vy: number;
-          health: number;
-          energy: number;
-          state: number;
-          direction: -1 | 1;
-          cooldown: number;
-          width: number;
-          height: number;
-        }
 
-        interface Actions {
-          left: boolean;
-          right: boolean;
-          up: boolean;
-          down: boolean;
-          action1: boolean;
-          action2: boolean;
-          action3: boolean;
-        }
-
-        declare function decide(self: FighterState, opponent: FighterState): Actions;
-      `, 'fighter-types.d.ts');
-    }
-  }
-};
 
 // Create an editor instance
 const createEditor = (
   container: HTMLDivElement,
   initialCode: string
-): editor.IStandaloneCodeEditor | null => {
-  if (!monacoInstance?.editor) return null;
-  
-  return monacoInstance.editor.create(container, {
+): monaco.editor.IStandaloneCodeEditor | null => {
+  return monaco.editor.create(container, {
     ...editorOptions,
     value: initialCode
   });
@@ -352,10 +314,39 @@ const initEditors = async () => {
   if (editorsInitialized) return;
   
   try {
-    monacoInstance = await loader.init();
-    if (!monacoInstance) return;
-    
-    configureMonacoLanguage(monacoInstance);
+    // Configure TypeScript/JS language features
+    if (monaco.languages && monaco.languages.typescript) {
+      const tsLang = monaco.languages.typescript as any;
+      if (tsLang.javascriptDefaults && typeof tsLang.javascriptDefaults.addExtraLib === 'function') {
+        tsLang.javascriptDefaults.addExtraLib(`
+          interface FighterState {
+            x: number;
+            y: number;
+            vx: number;
+            vy: number;
+            health: number;
+            energy: number;
+            state: number;
+            direction: -1 | 1;
+            cooldown: number;
+            width: number;
+            height: number;
+          }
+
+          interface Actions {
+            left: boolean;
+            right: boolean;
+            up: boolean;
+            down: boolean;
+            action1: boolean;
+            action2: boolean;
+            action3: boolean;
+          }
+
+          declare function decide(self: FighterState, opponent: FighterState): Actions;
+        `, 'fighter-types.d.ts');
+      }
+    }
     
     if (sideBySideMode.value) {
       // Initialize both editors
@@ -466,9 +457,7 @@ watch(codeB, () => {
 
 // Update editor theme when color mode changes
 watch(editorTheme, (newTheme) => {
-  if (monacoInstance?.editor) {
-    monacoInstance.editor.setTheme(newTheme);
-  }
+  monaco.editor.setTheme(newTheme);
 });
 
 onMounted(() => {
