@@ -3,7 +3,6 @@
     v-model:open="isModalOpen"
     size="xl"
     :close-on-backdrop="false"
-    class="sf-modal sf-modal--disclaimer"
     @update:open="handleOpenChange"
   >
     <template #header>
@@ -15,7 +14,7 @@
       </div>
     </template>
 
-    <div class="about-panel sf-modal-scope" style="padding-top: 0;">
+    <div class="about-panel sf-modal-scope sf-modal-scope--disclaimer" style="padding-top: 0;">
       <div style="color: var(--vd-text-secondary); display: flex; flex-direction: column; gap: 1rem;">
         <section>
           <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Important Notice</h3>

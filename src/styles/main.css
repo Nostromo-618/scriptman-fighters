@@ -485,11 +485,9 @@ body {
 }
 
 /*
- * VdModal teleports to <body>, so component-scoped styles never reach the
- * panel. Override Fibonacci modal widths (md=377px / xl=987px) with wide
- * landscape dialogs on desktop.
+ * VdModal teleports to <body> (Teleport root), so do not put class= on
+ * <VdModal> — Vue cannot inherit attrs. Target panels via :has(scope markers).
  */
-.sf-modal .vd-modal-panel,
 .vd-modal:has(.sf-modal-scope) .vd-modal-panel {
   --vd-modal-dialog-max-width: min(80vw, 64rem);
   width: min(80vw, 64rem);
@@ -497,21 +495,18 @@ body {
   max-height: min(85dvh, 85vh);
 }
 
-.sf-modal--about .vd-modal-panel,
-.vd-modal:has(.about-tabs-wrap) .vd-modal-panel {
+.vd-modal:has(.sf-modal-scope--about) .vd-modal-panel {
   --vd-modal-dialog-max-width: min(80vw, 72rem);
   width: min(80vw, 72rem);
   max-width: min(80vw, 72rem);
   max-height: min(90dvh, 90vh);
 }
 
-.sf-modal--about .vd-modal-body,
-.vd-modal:has(.about-tabs-wrap) .vd-modal-body {
+.vd-modal:has(.sf-modal-scope--about) .vd-modal-body {
   overflow-y: auto;
 }
 
-.sf-modal--script-editor .vd-modal-panel,
-.vd-modal:has(.script-editor-card) .vd-modal-panel {
+.vd-modal:has(.sf-modal-scope--script-editor) .vd-modal-panel {
   --vd-modal-dialog-max-width: min(98vw, 98rem);
   width: min(98vw, 98rem);
   max-width: 98vw;
@@ -519,8 +514,7 @@ body {
   max-height: min(95vh, 95dvh);
 }
 
-.sf-modal--script-editor .vd-modal-body,
-.vd-modal:has(.script-editor-card) .vd-modal-body {
+.vd-modal:has(.sf-modal-scope--script-editor) .vd-modal-body {
   flex: 1;
   min-height: 0;
   overflow: hidden;
@@ -528,17 +522,15 @@ body {
   flex-direction: column;
 }
 
-.sf-modal--disclaimer .vd-modal-header > .vd-btn-icon {
+.vd-modal:has(.sf-modal-scope--disclaimer) .vd-modal-header > .vd-btn-icon {
   display: none;
 }
 
-.sf-modal .vd-modal-body,
 .vd-modal:has(.sf-modal-scope) .vd-modal-body {
   overflow-y: auto;
 }
 
 @media (max-width: 639.98px) {
-  .sf-modal .vd-modal-panel,
   .vd-modal:has(.sf-modal-scope) .vd-modal-panel {
     --vd-modal-dialog-max-width: 100%;
     width: 100%;

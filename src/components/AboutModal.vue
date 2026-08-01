@@ -167,7 +167,7 @@ const gamepadInfo = [
     <i class="ph-duotone ph-info" aria-hidden="true"></i>
   </VdButton>
 
-  <VdModal v-model:open="open" size="xl" class="sf-modal sf-modal--about">
+  <VdModal v-model:open="open" size="xl">
     <template #header>
       <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1;">
         <div
@@ -188,7 +188,7 @@ const gamepadInfo = [
       </div>
     </template>
 
-    <div class="about-tabs-wrap sf-modal-scope">
+    <div class="about-tabs-wrap sf-modal-scope sf-modal-scope--about">
       <VdButton
         v-if="canScrollLeft"
         variant="ghost"

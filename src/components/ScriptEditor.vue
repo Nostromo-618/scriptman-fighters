@@ -2,10 +2,9 @@
   <VdModal
     v-model:open="isOpen"
     size="xl"
-    class="sf-modal sf-modal--script-editor"
     @close="onClose"
   >
-    <VdCard class="script-editor-card sf-modal-scope">
+    <VdCard class="script-editor-card sf-modal-scope sf-modal-scope--script-editor">
       <template #header>
         <div class="script-editor-header">
           <div class="script-editor-top">

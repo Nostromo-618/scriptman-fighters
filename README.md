@@ -177,6 +177,38 @@ scriptman-fighters/
 
 ---
 
+## Testing
+
+Automated tests use **Vitest** for pure TypeScript modules and **Playwright** (Chromium) for browser smoke flows.
+
+```bash
+pnpm install
+
+# Unit tests (loop safety, compiler, validation, persistence)
+pnpm run test:unit
+
+# E2E smoke tests (disclaimer, match controls, script editor)
+pnpm run test:e2e
+
+# Full suite
+pnpm run test
+
+# Unit coverage report
+pnpm run test:coverage
+```
+
+E2E tests build the app and serve it via `vite preview` at `/scriptman-fighters/` to match GitHub Pages. CI runs `test:unit` then `test:e2e` on pushes and pull requests to `main`.
+
+---
+
+## Deploy
+
+Pushes to `main` (and manual `workflow_dispatch`) run `.github/workflows/deploy.yml`, which builds with Vite (`base` `/scriptman-fighters/`) and publishes `dist/` to GitHub Pages.
+
+In the repo settings, set **Pages → Source** to **GitHub Actions**. Override the base path with `VITE_BASE` if deploying to a user/org site or custom domain.
+
+---
+
 ## License
 
 MIT License - feel free to use this code for learning and projects.
