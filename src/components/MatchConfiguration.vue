@@ -175,6 +175,7 @@ const getPlayerTypeLabel = (type: PlayerType): string => {
 }
 
 .player-buttons :deep(.vd-btn) {
+  margin: 0;
   font-size: 0.625rem;
   font-weight: 700;
   width: 100%;
