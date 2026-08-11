@@ -11,6 +11,25 @@ export interface ChangelogEntry {
 
 export const changelogData: ChangelogEntry[] = [
     {
+        version: '2.0.1',
+        date: '2026-08-11',
+        changes: {
+            added: [
+                'Inline Start/Reset VdFab controls beside player pickers',
+                'vd3 and vd3-cbun attribution links in the match panel',
+                'sfighters- localStorage key prefix with migration from legacy keys'
+            ],
+            changed: [
+                'Switched UI icons to vd3 VdIcon outline style',
+                'Touch controls CSS (no Tailwind utilities); larger block button',
+                'Vitest 4 and TypeScript 7 toolchains'
+            ],
+            fixed: [
+                'Match FAB buttons contained inside the dashboard card on desktop'
+            ]
+        }
+    },
+    {
         version: '2.0.0',
         date: '2026-08-01',
         changes: {
@@ -53,7 +72,7 @@ export const changelogData: ChangelogEntry[] = [
 export function useChangelog() {
     return {
         changelog: changelogData,
-        getLatestVersion: () => changelogData[0]?.version || '2.0.0',
+        getLatestVersion: () => changelogData[0]?.version || '2.0.1',
         getVersionEntry: (version: string) => {
             return changelogData.find(entry => entry.version === version)
         }

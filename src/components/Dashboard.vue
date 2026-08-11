@@ -50,6 +50,12 @@ const toggleRunning = () => {
 
 <style scoped>
 .dashboard-card :deep(.vd-card-body) {
-  padding: 1.5rem;
+  padding: 1.25rem;
+  min-width: 0;
+}
+
+.dashboard-card :deep(.vd-card) {
+  min-width: 0;
+  width: 100%;
 }
 </style>

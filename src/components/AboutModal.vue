@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, watch, onUnmounted, nextTick } from "vue";
-import { VdModal, VdButton, VdTabs, VdAccordion } from "@vanduo-oss/vd3";
+import { VdModal, VdButton, VdTabs, VdAccordion, VdIcon } from "@vanduo-oss/vd3";
 import { useChangelog } from "@/composables/useChangelog";
 
 const props = withDefaults(
@@ -12,7 +12,7 @@ const props = withDefaults(
 
 const open = defineModel<boolean>("open", { default: false });
 
-const version = "2.0.0";
+const version = "2.0.1";
 const activeTab = ref("overview");
 
 const tabs = [
@@ -164,20 +164,14 @@ const gamepadInfo = [
     aria-label="About Scriptman Fighters"
     @click="open = true"
   >
-    <i class="ph-duotone ph-info" aria-hidden="true"></i>
+    <VdIcon name="info" />
   </VdButton>
 
   <VdModal v-model:open="open" size="xl">
     <template #header>
       <div style="display: flex; align-items: center; gap: 0.75rem; flex: 1;">
-        <div
-          style="padding: 0.5rem; border-radius: 0.5rem; background: color-mix(in srgb, var(--vd-color-primary) 12%, transparent);"
-        >
-          <i
-            class="ph-duotone ph-info"
-            aria-hidden="true"
-            style="font-size: 1.5rem; color: var(--vd-color-primary);"
-          ></i>
+        <div class="about-header-icon-wrap">
+          <VdIcon name="info" size="lg" />
         </div>
         <div>
           <h2 style="margin: 0; font-size: 1.125rem; font-weight: 600;">Scriptman Fighters</h2>
@@ -197,7 +191,7 @@ const gamepadInfo = [
         aria-label="Scroll tabs left"
         @click="scrollTabsLeft"
       >
-        <i class="ph-duotone ph-caret-left" aria-hidden="true"></i>
+        <VdIcon name="caret-left" />
       </VdButton>
 
       <div v-if="canScrollLeft" class="about-tab-fade about-tab-fade--left" />
@@ -210,7 +204,7 @@ const gamepadInfo = [
         aria-label="Scroll tabs right"
         @click="scrollTabsRight"
       >
-        <i class="ph-duotone ph-caret-right" aria-hidden="true"></i>
+        <VdIcon name="caret-right" />
       </VdButton>
 
       <div v-if="canScrollRight" class="about-tab-fade about-tab-fade--right" />
@@ -389,6 +383,17 @@ return {
 </template>
 
 <style scoped>
+.about-header-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: color-mix(in srgb, var(--vd-color-primary) 12%, transparent);
+  color: var(--vd-color-primary);
+  line-height: 1;
+}
+
 .changelog-tag {
   display: inline-block;
   font-size: 0.75rem;

@@ -3,21 +3,21 @@ import { expect, test } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await page.evaluate(() => {
-    localStorage.setItem("scriptman_fighters_disclaimer_accepted", "true");
+    localStorage.setItem("sfighters-disclaimer-accepted", "true");
   });
   await page.reload();
-  await expect(page.getByRole("button", { name: "START MATCH" })).toBeVisible();
+  await expect(page.getByRole("button", { name: "Start match" })).toBeVisible();
 });
 
 test("start, pause, and reset match controls", async ({ page }) => {
-  await page.getByRole("button", { name: "START MATCH" }).click();
-  await expect(page.getByRole("button", { name: "PAUSE" })).toBeVisible();
+  await page.getByRole("button", { name: "Start match" }).click();
+  await expect(page.getByRole("button", { name: "Pause match" })).toBeVisible();
 
-  await page.getByRole("button", { name: "PAUSE" }).click();
-  await expect(page.getByRole("button", { name: "RESUME" })).toBeVisible();
+  await page.getByRole("button", { name: "Pause match" }).click();
+  await expect(page.getByRole("button", { name: "Resume match" })).toBeVisible();
 
-  await page.getByRole("button", { name: "RESET MATCH" }).click();
-  await expect(page.getByRole("button", { name: "START MATCH" })).toBeVisible();
+  await page.getByRole("button", { name: "Reset match" }).click();
+  await expect(page.getByRole("button", { name: "Start match" })).toBeVisible();
 });
 
 test("theme switcher updates data-theme without crashing", async ({ page }) => {

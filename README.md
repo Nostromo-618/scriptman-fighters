@@ -26,7 +26,7 @@ A fighting game where you can play as a human or write JavaScript to control AI 
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/scriptman-fighters.git
+git clone https://github.com/Nostromo-618/scriptman-fighters.git
 cd scriptman-fighters
 
 # Install dependencies

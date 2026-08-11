@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { VdThemeSwitcher, VdOffcanvas } from "@vanduo-oss/vd3";
+import { VdThemeSwitcher, VdOffcanvas, VdIcon } from "@vanduo-oss/vd3";
 import AppLogo from "./AppLogo.vue";
 import AboutModal from "./AboutModal.vue";
 
@@ -37,7 +37,7 @@ function fromMenu(action: () => void) {
             aria-label="About Scriptman Fighters"
             @click="aboutModalOpen = true"
           >
-            <i class="ph-duotone ph-info" aria-hidden="true"></i>
+            <VdIcon name="info" />
           </button>
           <a
             class="header-icon-btn"
@@ -46,7 +46,7 @@ function fromMenu(action: () => void) {
             rel="noopener noreferrer"
             aria-label="GitHub"
           >
-            <i class="ph-duotone ph-github-logo" aria-hidden="true"></i>
+            <VdIcon name="github-logo" />
           </a>
         </div>
 
@@ -57,7 +57,7 @@ function fromMenu(action: () => void) {
           :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
           @click="mobileMenuOpen = true"
         >
-          <i class="ph-duotone ph-list" aria-hidden="true"></i>
+          <VdIcon name="list" />
         </button>
       </div>
     </div>
@@ -65,7 +65,7 @@ function fromMenu(action: () => void) {
     <VdOffcanvas v-model="mobileMenuOpen" placement="right">
       <nav class="header-menu" aria-label="Header menu">
         <button type="button" class="header-menu-item" @click="fromMenu(openAboutModal)">
-          <i class="ph-duotone ph-info" aria-hidden="true"></i>
+          <VdIcon name="info" />
           <span>About</span>
         </button>
         <a
@@ -75,9 +75,9 @@ function fromMenu(action: () => void) {
           rel="noopener noreferrer"
           @click="mobileMenuOpen = false"
         >
-          <i class="ph-duotone ph-github-logo" aria-hidden="true"></i>
+          <VdIcon name="github-logo" />
           <span>GitHub</span>
-          <i class="ph-duotone ph-arrow-square-out" aria-hidden="true" style="margin-left: auto; font-size: 0.875rem;"></i>
+          <VdIcon name="arrow-square-out" class="header-menu-external" />
         </a>
       </nav>
     </VdOffcanvas>

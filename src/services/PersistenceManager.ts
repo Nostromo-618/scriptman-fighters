@@ -8,9 +8,10 @@
  */
 
 import type { GameSettings } from '../types';
+import { STORAGE } from '../constants/storageKeys';
 
 const KEYS = {
-  SETTINGS: 'scriptman_settings_v1',
+  SETTINGS: STORAGE.SETTINGS,
 };
 
 // --- SETTINGS PERSISTENCE ---

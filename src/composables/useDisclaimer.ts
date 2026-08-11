@@ -10,6 +10,7 @@
 
 import { ref, watch, onMounted, onUnmounted, type Ref } from 'vue';
 import { useScrollLock } from '@vueuse/core';
+import { STORAGE } from '@/constants/storageKeys';
 
 type DisclaimerStatus = 'PENDING' | 'ACCEPTED' | 'DECLINED';
 
@@ -20,7 +21,7 @@ interface UseDisclaimerReturn {
   handleReturnToDisclaimer: () => void;
 }
 
-const DISCLAIMER_STORAGE_KEY = 'scriptman_fighters_disclaimer_accepted';
+const DISCLAIMER_STORAGE_KEY = STORAGE.DISCLAIMER;
 
 export const useDisclaimer = (): UseDisclaimerReturn => {
   const disclaimerStatus = ref<DisclaimerStatus>('PENDING');

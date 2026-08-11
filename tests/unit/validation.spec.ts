@@ -67,7 +67,7 @@ describe("safeLoadFromStorage", () => {
 
   it("returns validated data when storage is valid", () => {
     store.set(
-      "scriptman_settings_v1",
+      "sfighters-settings-v1",
       JSON.stringify({
         fps: 60,
         simulationSpeed: 1,
@@ -77,7 +77,7 @@ describe("safeLoadFromStorage", () => {
       }),
     );
 
-    const loaded = safeLoadFromStorage("scriptman_settings_v1", GameSettingsSchema);
+    const loaded = safeLoadFromStorage("sfighters-settings-v1", GameSettingsSchema);
 
     expect(loaded).toEqual({
       fps: 60,
@@ -89,20 +89,20 @@ describe("safeLoadFromStorage", () => {
   });
 
   it("returns null for corrupt JSON", () => {
-    store.set("scriptman_settings_v1", "{not-json");
+    store.set("sfighters-settings-v1", "{not-json");
 
-    const loaded = safeLoadFromStorage("scriptman_settings_v1", GameSettingsSchema);
+    const loaded = safeLoadFromStorage("sfighters-settings-v1", GameSettingsSchema);
 
     expect(loaded).toBeNull();
   });
 
   it("returns null when schema validation fails", () => {
     store.set(
-      "scriptman_settings_v1",
+      "sfighters-settings-v1",
       JSON.stringify({ fps: 999, player1Type: "HUMAN" }),
     );
 
-    const loaded = safeLoadFromStorage("scriptman_settings_v1", GameSettingsSchema);
+    const loaded = safeLoadFromStorage("sfighters-settings-v1", GameSettingsSchema);
 
     expect(loaded).toBeNull();
   });

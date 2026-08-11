@@ -1,21 +1,5 @@
 <template>
   <div class="match-config">
-    <div class="match-actions">
-      <VdButton
-        :variant="isRunning ? 'warning' : 'success'"
-        @click="onToggleRunning"
-      >
-        <i
-          :class="isRunning ? 'ph-duotone ph-pause' : 'ph-duotone ph-play'"
-          aria-hidden="true"
-        ></i>
-        {{ startButtonText }}
-      </VdButton>
-      <VdButton variant="secondary" @click="onResetMatch">
-        RESET MATCH
-      </VdButton>
-    </div>
-
     <div class="player-selectors">
       <div class="player-column">
         <h2 class="player-heading player-heading--p1">
@@ -67,18 +51,54 @@
           </VdButton>
         </div>
       </div>
+
+      <div class="match-fab-column" aria-label="Match controls">
+        <VdFab
+          :variant="isRunning ? 'secondary' : 'success'"
+          size="sm"
+          :aria-label="startAriaLabel"
+          class="match-fab match-fab--start"
+          @click="onToggleRunning"
+        >
+          <VdIcon :name="isRunning ? 'pause' : 'play'" size="sm" />
+        </VdFab>
+
+        <VdFab
+          variant="danger"
+          size="sm"
+          aria-label="Reset match"
+          class="match-fab match-fab--reset"
+          @click="onResetMatch"
+        >
+          <VdIcon name="arrow-counter-clockwise" size="sm" />
+        </VdFab>
+      </div>
     </div>
 
     <VdButton variant="info" class="script-editor-open-btn" @click="onOpenScriptEditor">
-      <i class="ph-duotone ph-pencil-simple-line" aria-hidden="true"></i>
+      <VdIcon name="pencil-simple-line" />
       Open Script Editor
     </VdButton>
+
+    <p class="match-attrib">
+      <a
+        href="https://vd3.vanduo.dev/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >UI by vd3</a>
+      <span class="match-attrib-sep" aria-hidden="true">·</span>
+      <a
+        href="https://vd3.vanduo.dev/cbun"
+        target="_blank"
+        rel="noopener noreferrer"
+      >Code Editor by vd3-cbun</a>
+    </p>
   </div>
 </template>
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { VdButton } from "@vanduo-oss/vd3";
+import { VdButton, VdFab, VdIcon } from "@vanduo-oss/vd3";
 import type { GameSettings, GameState, PlayerType } from "@/types";
 
 interface Props {
@@ -102,10 +122,10 @@ const canChangeSettings = computed(
     props.gameState.roundStatus === "WAITING",
 );
 
-const startButtonText = computed(() => {
-  if (props.isRunning) return "PAUSE";
-  if (props.gameState.roundStatus === "WAITING") return "START MATCH";
-  return "RESUME";
+const startAriaLabel = computed(() => {
+  if (props.isRunning) return "Pause match";
+  if (props.gameState.roundStatus === "WAITING") return "Start match";
+  return "Resume match";
 });
 
 const playerTypes: PlayerType[] = ["HUMAN", "CUSTOM_A", "CUSTOM_B"];
@@ -141,12 +161,13 @@ const getPlayerTypeLabel = (type: PlayerType): string => {
 </script>
 
 <style scoped>
-.match-actions :deep(.vd-btn),
-.script-editor-open-btn {
+.script-editor-open-btn,
+.player-buttons :deep(.vd-btn) {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  text-align: center;
 }
 
 .script-editor-open-btn {
@@ -156,5 +177,6 @@ const getPlayerTypeLabel = (type: PlayerType): string => {
 .player-buttons :deep(.vd-btn) {
   font-size: 0.625rem;
   font-weight: 700;
+  width: 100%;
 }
 </style>

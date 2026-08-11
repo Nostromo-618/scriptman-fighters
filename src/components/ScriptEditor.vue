@@ -37,7 +37,7 @@
             </div>
 
             <VdButton variant="ghost" aria-label="Close editor" @click="onClose">
-              <i class="ph-duotone ph-x" aria-hidden="true"></i>
+              <VdIcon name="x" />
             </VdButton>
           </div>
 
@@ -76,7 +76,7 @@
           </div>
 
           <div class="script-editor-warning">
-            <i class="ph-duotone ph-shield-warning" aria-hidden="true"></i>
+            <VdIcon name="shield-warning" />
             <span>
               <strong>Security:</strong> Only run scripts you understand. Never paste code from untrusted sources.
             </span>
@@ -195,6 +195,7 @@ import {
   VdSwitch,
   VdBadge,
   VdProgress,
+  VdIcon,
 } from "@vanduo-oss/vd3";
 import { VdCodeEditor } from "@vanduo-oss/vd3-cbun/code-editor";
 import {

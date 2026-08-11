@@ -3,7 +3,7 @@ import { expect, test } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await page.evaluate(() => {
-    localStorage.setItem("scriptman_fighters_disclaimer_accepted", "true");
+    localStorage.setItem("sfighters-disclaimer-accepted", "true");
   });
   await page.reload();
   await expect(page.getByRole("button", { name: /Open Script Editor/i })).toBeVisible();

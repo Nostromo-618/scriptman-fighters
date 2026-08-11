@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
   await page.evaluate(() => {
+    localStorage.removeItem("sfighters-disclaimer-accepted");
     localStorage.removeItem("scriptman_fighters_disclaimer_accepted");
   });
   await page.reload();

@@ -3,7 +3,7 @@
     <div class="goodbye-inner">
       <div>
         <div class="goodbye-icon-wrap">
-          <i class="ph-duotone ph-hand-waving" aria-hidden="true"></i>
+          <VdIcon name="hand-waving" size="lg" />
         </div>
         <h1 class="goodbye-title">Farewell</h1>
         <p class="goodbye-text">
@@ -16,7 +16,7 @@
           Changed your mind? You can always return and review the terms again.
         </p>
         <VdButton variant="success" size="lg" @click="props.onReturn">
-          <i class="ph-duotone ph-arrow-left" aria-hidden="true"></i>
+          <VdIcon name="arrow-left" />
           Return to Disclaimer
         </VdButton>
       </div>
@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { VdButton } from "@vanduo-oss/vd3";
+import { VdButton, VdIcon } from "@vanduo-oss/vd3";
 
 interface Props {
   onReturn: () => void;
@@ -42,6 +42,7 @@ const props = defineProps<Props>();
 .goodbye-inner :deep(.vd-btn) {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 }
 </style>

@@ -8,8 +8,13 @@
 
 import { DEFAULT_FIGHTER_SCRIPT } from '../templates/defaultFighterScript';
 import { DEFAULT_FIGHTER_SCRIPT_B } from '../templates/defaultFighterScriptB';
+import {
+  STORAGE,
+  SCRIPT_EXPORT_TYPE,
+  SCRIPT_EXPORT_TYPE_LEGACY,
+} from '../constants/storageKeys';
 
-const LOCALSTORAGE_SCRIPT_KEY_PREFIX = 'scriptman_fighter_script_';
+const LOCALSTORAGE_SCRIPT_KEY_PREFIX = STORAGE.SCRIPT_PREFIX;
 
 /**
  * Returns the appropriate default script template for a given slot.
@@ -43,21 +48,22 @@ export function saveScript(scriptCode: string, slotId: string = 'slot1'): void {
 /**
  * Loads user script from the browser's localStorage.
  * If no saved script exists, returns the slot-specific default template:
- * - Script A (slot1): Strategic fighter with logical decision-making
- * - Script B (slot2): Chaotic fighter with heavy randomization
+ * - slot1 → Strategic fighter (DEFAULT_FIGHTER_SCRIPT)
+ * - slot2 → Chaotic fighter (DEFAULT_FIGHTER_SCRIPT_B)
  * 
  * @param slotId - The slot identifier (e.g., 'slot1', 'slot2')
- * @returns The saved script code, or the slot's default template if nothing was saved
+ * @returns The saved script code, or the default template if none exists
  */
 export function loadScript(slotId: string = 'slot1'): string {
-    const defaultScript = getDefaultScriptForSlot(slotId);
     try {
-        const saved = localStorage.getItem(`${LOCALSTORAGE_SCRIPT_KEY_PREFIX}${slotId}`);
-        return saved || defaultScript;
+        const savedScript = localStorage.getItem(`${LOCALSTORAGE_SCRIPT_KEY_PREFIX}${slotId}`);
+        if (savedScript) {
+            return savedScript;
+        }
     } catch (storageError) {
         console.warn('Failed to load script from localStorage:', storageError);
-        return defaultScript;
     }
+    return getDefaultScriptForSlot(slotId);
 }
 
 /**
@@ -68,7 +74,7 @@ export function loadScript(slotId: string = 'slot1'): string {
 export function exportScript(scriptCode: string): void {
     const exportData = {
         version: 1,
-        type: 'scriptman-fighter-script',
+        type: SCRIPT_EXPORT_TYPE,
         code: scriptCode,
         exportedAt: new Date().toISOString()
     };
@@ -98,7 +104,9 @@ export function importScript(jsonString: string): string | null {
     try {
         const parsedData = JSON.parse(jsonString);
 
-        const isValidType = parsedData.type === 'scriptman-fighter-script' || parsedData.type === 'scriptman-fighter-script';
+        const isValidType =
+            parsedData.type === SCRIPT_EXPORT_TYPE ||
+            parsedData.type === SCRIPT_EXPORT_TYPE_LEGACY;
         const hasCodeString = typeof parsedData.code === 'string';
 
         if (!isValidType || !hasCodeString) {
@@ -112,4 +120,3 @@ export function importScript(jsonString: string): string | null {
         return null;
     }
 }
-
